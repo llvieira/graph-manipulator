@@ -21,12 +21,8 @@ public class GraphManipulator implements Manipulator {
 			Map<Integer, Integer> connections = this.getValuesFromFile(path);
 			
 			for(Integer vertex : connections.keySet()) {
-				if(this.graph.containsKey(vertex)) {
-					this.graph.get(vertex).add(connections.get(vertex));
-				}else {
-					this.graph.put(vertex, new HashSet<>());
-					this.graph.get(vertex).add(vertex);
-				}
+				this.includeRelation(vertex, connections.get(vertex));
+				this.includeRelation(connections.get(vertex), vertex);
 			}
 			
 		} catch (FileNotFoundException e) {
@@ -104,5 +100,17 @@ public class GraphManipulator implements Manipulator {
 		scanner.close();
 
 		return mapOfConnections;
+	}
+	
+	private void includeRelation(Integer vertex1, Integer vertex2) {
+		if (vertex1 == null || vertex2 == null)
+			return;
+		
+		if(this.graph.containsKey(vertex1)) {
+			this.graph.get(vertex1).add(vertex2);
+		}else {
+			this.graph.put(vertex1, new HashSet<>());
+			this.graph.get(vertex1).add(vertex2);
+		}
 	}
 }
