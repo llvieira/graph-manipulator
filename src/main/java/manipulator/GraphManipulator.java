@@ -15,6 +15,14 @@ public class GraphManipulator implements Manipulator {
 		this.graph = new HashMap<>();
 	}
 
+	public Map<Integer, Set<Integer>> getGraph() {
+		return graph;
+	}
+
+	public void setGraph(Map<Integer, Set<Integer>> graph) {
+		this.graph = graph;
+	}
+
 	@Override
 	public void readGraph(String path) {
 		try {
@@ -90,11 +98,8 @@ public class GraphManipulator implements Manipulator {
 			String line = scanner.nextLine();
 			String[] values = line.trim().split(" ");
 
-			if (values.length > 1) {
+			if (values.length > 1)
 				mapOfConnections.put(Integer.valueOf(values[0]), Integer.valueOf(values[1]));
-			} else {
-				mapOfConnections.put(Integer.valueOf(values[0]), null);
-			}
 		}
 
 		scanner.close();
@@ -102,10 +107,7 @@ public class GraphManipulator implements Manipulator {
 		return mapOfConnections;
 	}
 	
-	private void includeRelation(Integer vertex1, Integer vertex2) {
-		if (vertex1 == null || vertex2 == null)
-			return;
-		
+	private void includeRelation(Integer vertex1, Integer vertex2) {		
 		if(this.graph.containsKey(vertex1)) {
 			this.graph.get(vertex1).add(vertex2);
 		}else {
