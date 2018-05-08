@@ -8,21 +8,21 @@ public interface Manipulator {
 
     void readWeightedGraph(String path);
 
-    int getVertexNumber(List<Integer> graph);
+    int getVertexNumber(Graph graph);
 
-    int getEdgeNumber(List<Integer> graph);
+    int getEdgeNumber(Graph graph);
 
-    float getMeanEdge(List<Integer> graph);
+    float getMeanEdge(Graph graph);
 
-    String graphRepresentation(List<Integer> graph, String type);
+    String graphRepresentation(Graph graph, String type);
 
-    String BFS(List<Integer> graph, List<Integer> vertex);
+    String BFS(Graph graph, List<Integer> vertex);
 
-    String DFS(List<Integer> graph, List<Integer> vertex);
+    String DFS(Graph graph, List<Integer> vertex);
 
-    String SCC(List<Integer> graph);
+    String SCC(Graph graph);
 
     String shortestPath(Integer vertex1, Integer vertex2);
 
-    String MST(List<Integer> graph);
+    String MST(Graph graph);
 }

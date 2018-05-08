@@ -25,7 +25,7 @@ public class GraphManipulatorTest {
 		graph.readGraph(path.getPath());
 		
 		for (int i = 0; i < connections.length; i++) {
-			Assert.assertEquals(this.graph.getGraph().get(i+1), connections[i]);
+			Assert.assertEquals(this.graph.getGraph().getConnections().get(i+1), connections[i]);
 		}
 	}
 	
