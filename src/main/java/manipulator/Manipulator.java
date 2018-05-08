@@ -1,26 +1,28 @@
 package manipulator;
 
+import java.util.List;
+
 public interface Manipulator {
 
     void readGraph(String path);
 
     void readWeightedGraph(String path);
 
-    int getVertexNumber(Graph graph);
+    int getVertexNumber(List<Integer> graph);
 
-    int getEdgeNumber(Graph graph);
+    int getEdgeNumber(List<Integer> graph);
 
-    float getMeanEdge(Graph graph);
+    float getMeanEdge(List<Integer> graph);
 
-    String graphRepresentation(Graph graph, String type);
+    String graphRepresentation(List<Integer> graph, String type);
 
-    String BFS(Graph graph, Vertex vertex);
+    String BFS(List<Integer> graph, List<Integer> vertex);
 
-    String DFS(Graph graph, Vertex vertex);
+    String DFS(List<Integer> graph, List<Integer> vertex);
 
-    String SCC(Graph graph);
+    String SCC(List<Integer> graph);
 
-    String shortestPath(Vertex vertex1, Vertex vertex2);
+    String shortestPath(Integer vertex1, Integer vertex2);
 
-    String MST(Graph graph);
+    String MST(List<Integer> graph);
 }
