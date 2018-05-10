@@ -1,19 +1,19 @@
 package manipulator;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Vertex {
 
     private Integer value;
-    private Set<Edge> edges;
+    private List<Edge> edges;
 
     public Vertex(Integer value) {
         this.value = value;
-        this.edges = new HashSet<>();
+        this.edges = new ArrayList<>();
     }
 
-    public Vertex(Integer value, Set<Edge> edges) {
+    public Vertex(Integer value, List<Edge> edges) {
         this.value = value;
         this.edges = edges;
     }
@@ -26,11 +26,11 @@ public class Vertex {
         this.value = value;
     }
 
-    public Set<Edge> getEdges() {
+    public List<Edge> getEdges() {
         return edges;
     }
 
-    public void setEdges(Set<Edge> edges) {
+    public void setEdges(List<Edge> edges) {
         this.edges = edges;
     }
 
@@ -41,14 +41,11 @@ public class Vertex {
 
         Vertex vertex = (Vertex) o;
 
-        if (value != null ? !value.equals(vertex.value) : vertex.value != null) return false;
-        return edges != null ? edges.equals(vertex.edges) : vertex.edges == null;
+        return value != null ? value.equals(vertex.value) : vertex.value == null;
     }
 
     @Override
     public int hashCode() {
-        int result = value != null ? value.hashCode() : 0;
-        result = 31 * result + (edges != null ? edges.hashCode() : 0);
-        return result;
+        return value != null ? value.hashCode() : 0;
     }
 }

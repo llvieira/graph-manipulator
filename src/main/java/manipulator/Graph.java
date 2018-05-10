@@ -1,44 +1,57 @@
 package manipulator;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Graph {
-	private Set<Vertex> nodes;
-	
+
+	private List<Vertex> nodes;
+
 	public Graph() {
-		this.nodes = new HashSet<>();
+		this.nodes = new ArrayList<>();
 	}
-	
-//	public Graph(Map<Vertex, Vertex> connections) {
-//		this();
-//		for(Vertex vertex : connections.keySet())
-//			this.includeRelation(vertex, connections.get(vertex));
-//	}
-//
-//	public Map<Vertex, Set<Vertex>> getEdges() {
-//		return connections;
-//	}
-//
-//	public void setEdges(Map<Vertex, Set<Vertex>> connections) {
-//		this.connections = connections;
-//	}
-//
-//	public void includeRelation(Vertex vertex1, Vertex vertex2) {
-//		this.addConnection(vertex1, vertex2);
-//		this.addConnection(vertex2, vertex1);
-//	}
-//
-//	public boolean contains(Vertex vertex) {
-//		return this.connections.containsKey(vertex);
-//	}
-//
-//	private void addConnection(Vertex vertex1, Vertex vertex2) {
-//		if(this.connections.containsKey(vertex1)) {
-//			this.connections.get(vertex1).add(vertex2);
-//		}else {
-//			this.connections.put(vertex1, new HashSet<>());
-//			this.connections.get(vertex1).add(vertex2);
-//		}
-//	}
+
+	public List<Vertex> getNodes() {
+		return nodes;
+	}
+
+	public void setNodes(List<Vertex> nodes) {
+		this.nodes = nodes;
+	}
+
+	public boolean contains(Vertex vertex) {
+		return this.nodes.contains(vertex);
+	}
+
+	public void connect(Vertex vertex1, Vertex vertex2) {
+		this.addVertex(vertex1);
+		this.addVertex(vertex2);
+
+		this.addEdge(vertex1, vertex2);
+		this.addEdge(vertex2, vertex1);
+	}
+
+	public void connectWeighted(Vertex vertex1, Vertex vertex2, Float weight) {
+		this.addVertex(vertex1);
+		this.addVertex(vertex2);
+
+		this.addWeightedEdge(vertex1, vertex2, weight);
+		this.addWeightedEdge(vertex2, vertex1, weight);
+	}
+
+	private void addVertex(Vertex vertex) {
+		if (! this.contains(vertex)) {
+			this.nodes.add(vertex);
+		}
+	}
+
+	private void addEdge(Vertex vertex1, Vertex vertex2) {
+		Edge edge = new Edge(vertex2);
+		this.nodes.get(nodes.indexOf(vertex1)).getEdges().add(edge);
+	}
+
+	private void addWeightedEdge(Vertex vertex1, Vertex vertex2, Float weight) {
+		Edge edge = new Edge(vertex2, weight);
+		this.nodes.get(nodes.indexOf(vertex1)).getEdges().add(edge);
+	}
 }
