@@ -2,6 +2,7 @@ package manipulator;
 
 import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Scanner;
 
 public class GraphManipulator implements Manipulator {
 	private Graph graph;
@@ -20,16 +21,29 @@ public class GraphManipulator implements Manipulator {
 
 	@Override
 	public void readGraph(String path) {
-		try {
-			this.graph = new Graph(Util.getValuesFromFile(path));
-			
-		} catch (FileNotFoundException e) {
-			System.out.println("File" + path + " does not exists.");
+			Util util = new Util();
+			Scanner scanner = util.getValuesFromFile(path);
+			Graph graph = new Graph();
+			while (scanner.hasNext()) {
+				String line = scanner.nextLine();
+				System.out.println(line);
+				graph.connect(line);
 		}
+		this.graph = graph;
+
 	}
 
 	@Override
 	public void readWeightedGraph(String path) {
+		Util util = new Util();
+		Scanner scanner = util.getValuesFromFile(path);
+		Graph graph = new Graph();
+		while (scanner.hasNext()) {
+			String line = scanner.nextLine();
+			graph.connectWeighted(line);
+		}
+
+		this.graph = graph;
 
 	}
 
