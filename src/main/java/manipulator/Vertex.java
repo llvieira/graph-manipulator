@@ -3,19 +3,19 @@ package manipulator;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Node {
+public class Vertex {
 
     private Integer value;
-    private Set<Edge> connections;
+    private Set<Edge> edges;
 
-    public Node(Integer value) {
+    public Vertex(Integer value) {
         this.value = value;
-        this.connections = new HashSet<>();
+        this.edges = new HashSet<>();
     }
 
-    public Node(Integer value, Set<Edge> connections) {
+    public Vertex(Integer value, Set<Edge> edges) {
         this.value = value;
-        this.connections = connections;
+        this.edges = edges;
     }
 
     public Integer getValue() {
@@ -26,12 +26,12 @@ public class Node {
         this.value = value;
     }
 
-    public Set<Edge> getConnections() {
-        return connections;
+    public Set<Edge> getEdges() {
+        return edges;
     }
 
-    public void setConnections(Set<Edge> connections) {
-        this.connections = connections;
+    public void setEdges(Set<Edge> edges) {
+        this.edges = edges;
     }
 
     @Override
@@ -39,16 +39,16 @@ public class Node {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Node node = (Node) o;
+        Vertex vertex = (Vertex) o;
 
-        if (value != null ? !value.equals(node.value) : node.value != null) return false;
-        return connections != null ? connections.equals(node.connections) : node.connections == null;
+        if (value != null ? !value.equals(vertex.value) : vertex.value != null) return false;
+        return edges != null ? edges.equals(vertex.edges) : vertex.edges == null;
     }
 
     @Override
     public int hashCode() {
         int result = value != null ? value.hashCode() : 0;
-        result = 31 * result + (connections != null ? connections.hashCode() : 0);
+        result = 31 * result + (edges != null ? edges.hashCode() : 0);
         return result;
     }
 }

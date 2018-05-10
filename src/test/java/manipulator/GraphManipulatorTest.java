@@ -1,6 +1,5 @@
 package manipulator;
 
-import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,44 +8,51 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class GraphManipulatorTest {
-	private GraphManipulator graph;
-	private final String GRAPH_SAMPLE_PATH = "samples/graph-sample.txt";
+
+	private final String GRAPH_SAMPLE_PATH = "src/test/java/manipulator/samples/graph-sample.txt";
+
+	private GraphManipulator graphManipulator;
 	private Set<?>[] connections;
 	
 	@Before
 	public void setUp() {
-		this.graph = new GraphManipulator();
+		this.graphManipulator = new GraphManipulator();
 		this.connections = this.mountConnections();
 	}
 
 	@Test
 	public void testReadGraph() {
-		URL path = GraphManipulatorTest.class.getResource(GRAPH_SAMPLE_PATH);
-		graph.readGraph(path.getPath());
+		Graph graph = graphManipulator.readGraph(GRAPH_SAMPLE_PATH);
 		
 		for (int i = 0; i < connections.length; i++) {
-			Assert.assertEquals(this.graph.getGraph().getConnections().get(i+1), connections[i]);
+			Assert.assertEquals(graph.getConnections().get(new Vertex(i + 1)), connections[i]);
 		}
 	}
 	
 	private Set<?>[] mountConnections() {
-		Set<Integer> connectionsFor1 = new HashSet<>();
-		connectionsFor1.add(2);
+		Vertex vertex1 = new Vertex(1);
+		Vertex vertex2 = new Vertex(2);
+		Vertex vertex3 = new Vertex(3);
+		Vertex vertex4 = new Vertex(4);
+		Vertex vertex5 = new Vertex(5);
+
+		Set<Vertex> connectionsFor1 = new HashSet<>();
+		connectionsFor1.add(vertex2);
 		
-		Set<Integer> connectionsFor2 = new HashSet<>();
-		connectionsFor2.add(1);
-		connectionsFor2.add(3);
+		Set<Vertex> connectionsFor2 = new HashSet<>();
+		connectionsFor2.add(vertex1);
+		connectionsFor2.add(vertex3);
 		
-		Set<Integer> connectionsFor3 = new HashSet<>();
-		connectionsFor3.add(2);
-		connectionsFor3.add(4);
+		Set<Vertex> connectionsFor3 = new HashSet<>();
+		connectionsFor3.add(vertex2);
+		connectionsFor3.add(vertex4);
 		
-		Set<Integer> connectionsFor4 = new HashSet<>();
-		connectionsFor4.add(3);
-		connectionsFor4.add(5);
+		Set<Vertex> connectionsFor4 = new HashSet<>();
+		connectionsFor4.add(vertex3);
+		connectionsFor4.add(vertex5);
 		
-		Set<Integer> connectionsFor5 = new HashSet<>();
-		connectionsFor5.add(4);
+		Set<Vertex> connectionsFor5 = new HashSet<>();
+		connectionsFor5.add(vertex4);
 		
 		Set<?>[] listOfConnections = new HashSet<?>[5];
 		listOfConnections[0] = connectionsFor1;
