@@ -4,7 +4,7 @@ public class Edge {
 
     private static final Float DEFAULT_WEIGHT = 1f;
 
-    // we already now its start point since each vertex has a list of edges.
+    // we already know its start point since each vertex has a list of edges.
     private Vertex end;
     private Float weight;
 
