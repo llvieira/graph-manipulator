@@ -5,17 +5,18 @@ import java.util.List;
 
 public class Vertex {
 	
-	// Switch to generic type
     private Integer value;
+    private boolean visited;
     private List<Edge> edges;
 
     public Vertex(Integer value) {
         this.value = value;
+        this.visited = false;
         this.edges = new ArrayList<>();
     }
 
     public Vertex(Integer value, List<Edge> edges) {
-        this.value = value;
+        this(value);
         this.edges = edges;
     }
 
@@ -25,6 +26,14 @@ public class Vertex {
 
     public void setValue(Integer value) {
         this.value = value;
+    }
+
+    public boolean isVisited() {
+        return this.visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
     }
 
     public List<Edge> getEdges() {

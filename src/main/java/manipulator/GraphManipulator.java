@@ -2,7 +2,7 @@ package manipulator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.util.*;
 
 public class GraphManipulator implements Manipulator {
 
@@ -67,7 +67,39 @@ public class GraphManipulator implements Manipulator {
 
 	@Override
 	public String DFS(Graph graph, Vertex vertex) {
-		return null;
+		DFSUtil(vertex);
+
+		for (Vertex otherVertices : graph.getNodes()) {
+			if (! otherVertices.isVisited()) {
+				DFSUtil(otherVertices);
+			}
+		}
+
+		clearVisitedProperty(graph);
+		return "";
+	}
+
+	private void DFSUtil(Vertex vertex) {
+		vertex.setVisited(true);
+
+		for (Edge edge : vertex.getEdges()) {
+			Vertex adjacent = getAdjacent(vertex, edge);
+			if (! adjacent.isVisited()) {
+
+				System.out.print(vertex.getValue() + " - " + adjacent.getValue());
+				System.out.println();
+
+				DFSUtil(adjacent);
+			}
+		}
+	}
+
+	private Vertex getAdjacent(Vertex vertex, Edge edge) {
+		if (edge.getEnd().equals(vertex)) {
+			return edge.getStart();
+		}
+
+		return edge.getEnd();
 	}
 
 	@Override
@@ -83,5 +115,35 @@ public class GraphManipulator implements Manipulator {
 	@Override
 	public String MST(Graph graph) {
 		return null;
+	}
+
+	private void clearVisitedProperty(Graph graph) {
+		for (Vertex vertex : graph.getNodes()) {
+			vertex.setVisited(false);
+		}
+	}
+
+	public static void main(String[] args) {
+		GraphManipulator gm = new GraphManipulator();
+
+		Graph graph = new Graph();
+
+		Vertex v1 = new Vertex(1);
+		Vertex v2 = new Vertex(2);
+		Vertex v3 = new Vertex(3);
+		Vertex v4 = new Vertex(4);
+		Vertex v5 = new Vertex(5);
+
+		graph.connect(v1, v2);
+		graph.connect(v1, v3);
+		graph.connect(v1, v4);
+		graph.connect(v3, v5);
+
+//		graph.connect(v1, v3);
+//		graph.connect(v3, v5);
+//		graph.connect(v1, v4);
+//		graph.connect(v4, v2);
+
+		gm.DFS(graph, v1);
 	}
 }
