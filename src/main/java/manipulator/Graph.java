@@ -1,46 +1,51 @@
 package manipulator;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Graph {
-	private Map<Integer, Set<Integer>> connections;
-	
+
+	private List<Vertex> nodes;
+
 	public Graph() {
-		this.connections = new HashMap<>();
-	}
-	
-	public Graph(Map<Integer, Integer> connections) {
-		this();
-		for(Integer vertex : connections.keySet())
-			this.includeRelation(vertex, connections.get(vertex));
-	}
-	
-	public Map<Integer, Set<Integer>> getConnections() {
-		return connections;
+		this.nodes = new ArrayList<>();
 	}
 
-	public void setConnections(Map<Integer, Set<Integer>> connections) {
-		this.connections = connections;
+	public List<Vertex> getNodes() {
+		return nodes;
 	}
 
-	public void includeRelation(Integer vertex1, Integer vertex2) {
-		this.addConnection(vertex1, vertex2);
-		this.addConnection(vertex2, vertex1);
+	public void setNodes(List<Vertex> nodes) {
+		this.nodes = nodes;
 	}
-	
-	public boolean contains(Integer vertex) {
-		return this.connections.containsKey(vertex);
+
+	public boolean contains(Vertex vertex) {
+		return this.nodes.contains(vertex);
 	}
-	
-	private void addConnection(Integer vertex1, Integer vertex2) {		
-		if(this.connections.containsKey(vertex1)) {
-			this.connections.get(vertex1).add(vertex2);
-		}else {
-			this.connections.put(vertex1, new HashSet<>());
-			this.connections.get(vertex1).add(vertex2);
+
+	public void connect(Vertex vertex1, Vertex vertex2) {
+		Edge edge = new Edge(vertex2, vertex1);
+		
+		vertex1.getEdges().add(edge);
+		vertex2.getEdges().add(edge);
+		
+		this.addVertex(vertex1);
+		this.addVertex(vertex2);
+	}
+
+	public void connect(Vertex vertex1, Vertex vertex2, Float weight) {
+		Edge edge = new Edge(vertex2, vertex1, weight);
+			
+		vertex1.getEdges().add(edge);
+		vertex2.getEdges().add(edge);
+		
+		this.addVertex(vertex1);
+		this.addVertex(vertex2);
+	}
+
+	private void addVertex(Vertex vertex) {
+		if (! this.contains(vertex)) {
+			this.nodes.add(vertex);
 		}
 	}
 }

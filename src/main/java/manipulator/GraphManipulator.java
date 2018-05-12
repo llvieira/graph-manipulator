@@ -1,41 +1,43 @@
 package manipulator;
 
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.List;
+import java.util.Scanner;
 
 public class GraphManipulator implements Manipulator {
-	private Graph graph;
-	
-	public GraphManipulator() {
-		this.graph = new Graph();
-	}
-
-	public Graph getGraph() {
-		return graph;
-	}
-
-	public void setGraph(Graph graph) {
-		this.graph = graph;
-	}
 
 	@Override
-	public void readGraph(String path) {
+	public Graph readGraph(String path) {
 		try {
-			this.graph = new Graph(Util.getValuesFromFile(path));
-			
+			File file = new File(path);
+			Scanner scanner = new Scanner(file);
+
+			Graph graph = new Graph();
+
+			while (scanner.hasNext()) {
+				String line = scanner.nextLine();
+				String[] values = line.trim().split(" ");
+
+				if (values.length > 1) {
+					Vertex vertex1 = new Vertex(Integer.valueOf(values[0]));
+					Vertex vertex2 = new Vertex(Integer.valueOf(values[1]));
+
+					graph.connect(vertex1, vertex2);
+				}
+			}
+
+			scanner.close();
+
+			return graph;
 		} catch (FileNotFoundException e) {
 			System.out.println("File" + path + " does not exists.");
+			return null;
 		}
 	}
 
 	@Override
 	public void readWeightedGraph(String path) {
 
-	}
-
-	@Override
-	public String shortestPath(Integer vertex1, Integer vertex2) {
-		return null;
 	}
 
 	@Override
@@ -59,17 +61,22 @@ public class GraphManipulator implements Manipulator {
 	}
 
 	@Override
-	public String BFS(Graph graph, List<Integer> vertex) {
+	public String BFS(Graph graph, Vertex vertex) {
 		return null;
 	}
 
 	@Override
-	public String DFS(Graph graph, List<Integer> vertex) {
+	public String DFS(Graph graph, Vertex vertex) {
 		return null;
 	}
 
 	@Override
 	public String SCC(Graph graph) {
+		return null;
+	}
+
+	@Override
+	public String shortestPath(Vertex vertex1, Vertex vertex2) {
 		return null;
 	}
 

@@ -1,10 +1,8 @@
 package manipulator;
 
-import java.util.List;
-
 public interface Manipulator {
 
-    void readGraph(String path);
+    Graph readGraph(String path);
 
     void readWeightedGraph(String path);
 
@@ -16,13 +14,13 @@ public interface Manipulator {
 
     String graphRepresentation(Graph graph, String type);
 
-    String BFS(Graph graph, List<Integer> vertex);
+    String BFS(Graph graph, Vertex vertex);
 
-    String DFS(Graph graph, List<Integer> vertex);
+    String DFS(Graph graph, Vertex vertex);
 
     String SCC(Graph graph);
 
-    String shortestPath(Integer vertex1, Integer vertex2);
+    String shortestPath(Vertex vertex1, Vertex vertex2);
 
     String MST(Graph graph);
 }
