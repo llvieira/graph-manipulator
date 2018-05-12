@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Vertex {
-
+	
+	// Switch to generic type
     private Integer value;
     private List<Edge> edges;
 

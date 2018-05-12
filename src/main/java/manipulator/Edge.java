@@ -4,12 +4,13 @@ public class Edge {
 
     private static final Float DEFAULT_WEIGHT = 1f;
 
-    // we already know its start point since each vertex has a list of edges.
+    private Vertex start;
     private Vertex end;
     private Float weight;
 
-    public Edge(Vertex end, Float weight) {
+    public Edge(Vertex end, Vertex start, Float weight) {
         this.end = end;
+        this.start = start;
 
         if (weight == null) {
             this.weight = Edge.DEFAULT_WEIGHT;
@@ -18,8 +19,8 @@ public class Edge {
         }
     }
 
-    public Edge(Vertex end) {
-        this(end, null);
+    public Edge(Vertex end, Vertex start) {
+        this(end, start, null);
     }
 
     public Vertex getEnd() {
@@ -28,6 +29,14 @@ public class Edge {
 
     public void setEnd(Vertex end) {
         this.end = end;
+    }
+    
+    public Vertex getStart() {
+        return start;
+    }
+    
+    public void setStart(Vertex start) {
+        this.start = start;
     }
 
     public Float getWeight() {
