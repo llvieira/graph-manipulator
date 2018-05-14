@@ -3,27 +3,27 @@ package manipulator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Vertex {
+public class Vertex<T> {
 	
 	// Switch to generic type
-    private Integer value;
+    private T value;
     private List<Edge> edges;
 
-    public Vertex(Integer value) {
+    public Vertex(T value) {
         this.value = value;
         this.edges = new ArrayList<>();
     }
 
-    public Vertex(Integer value, List<Edge> edges) {
+    public Vertex(T value, List<Edge> edges) {
         this.value = value;
         this.edges = edges;
     }
 
-    public Integer getValue() {
+    public T getValue() {
         return value;
     }
 
-    public void setValue(Integer value) {
+    public void setValue(T value) {
         this.value = value;
     }
 
@@ -34,7 +34,7 @@ public class Vertex {
     public void setEdges(List<Edge> edges) {
         this.edges = edges;
     }
-
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
