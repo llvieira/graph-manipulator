@@ -3,36 +3,39 @@ package manipulator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Vertex {
+public class Vertex<T> {
 	
-	// Switch to generic type
-    private Integer value;
-    private List<Edge> edges;
+	private T value;
+    private List<Edge<T>> edges;
 
-    public Vertex(Integer value) {
+    public Vertex(T value) {
         this.value = value;
         this.edges = new ArrayList<>();
     }
 
-    public Vertex(Integer value, List<Edge> edges) {
+    public Vertex(T value, List<Edge<T>> edges) {
         this.value = value;
         this.edges = edges;
     }
 
-    public Integer getValue() {
+    public T getValue() {
         return value;
     }
 
-    public void setValue(Integer value) {
+    public void setValue(T value) {
         this.value = value;
     }
 
-    public List<Edge> getEdges() {
+    public List<Edge<T>> getEdges() {
         return edges;
     }
 
-    public void setEdges(List<Edge> edges) {
+    public void setEdges(List<Edge<T>> edges) {
         this.edges = edges;
+    }
+    
+    public int degree() {
+    	return this.edges.size();
     }
 
     @Override

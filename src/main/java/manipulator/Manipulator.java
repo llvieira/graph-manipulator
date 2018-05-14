@@ -2,25 +2,25 @@ package manipulator;
 
 public interface Manipulator {
 
-    Graph readGraph(String path);
+    Graph<Integer> readGraph(String path);
 
     void readWeightedGraph(String path);
 
-    int getVertexNumber(Graph graph);
+    int getVertexNumber(Graph<Integer> graph);
 
-    int getEdgeNumber(Graph graph);
+    int getEdgeNumber(Graph<Integer> graph);
 
-    float getMeanEdge(Graph graph);
+    float getMeanEdge(Graph<Integer> graph);
 
-    String graphRepresentation(Graph graph, String type);
+    String graphRepresentation(Graph<Integer> graph, String type);
 
-    String BFS(Graph graph, Vertex vertex);
+    String BFS(Graph<Integer> graph, Vertex<Integer> vertex);
 
-    String DFS(Graph graph, Vertex vertex);
+    String DFS(Graph<Integer> graph, Vertex<Integer> vertex);
 
-    String SCC(Graph graph);
+    String SCC(Graph<Integer> graph);
 
-    String shortestPath(Vertex vertex1, Vertex vertex2);
+    String shortestPath(Vertex<Integer> vertex1, Vertex<Integer> vertex2);
 
-    String MST(Graph graph);
+    String MST(Graph<Integer> graph);
 }

@@ -2,25 +2,27 @@ package manipulator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class GraphManipulator implements Manipulator {
 
 	@Override
-	public Graph readGraph(String path) {
+	public Graph<Integer> readGraph(String path) {
 		try {
 			File file = new File(path);
 			Scanner scanner = new Scanner(file);
 
-			Graph graph = new Graph();
+			Graph<Integer> graph = new Graph<Integer>();
 
 			while (scanner.hasNext()) {
 				String line = scanner.nextLine();
 				String[] values = line.trim().split(" ");
 
 				if (values.length > 1) {
-					Vertex vertex1 = new Vertex(Integer.valueOf(values[0]));
-					Vertex vertex2 = new Vertex(Integer.valueOf(values[1]));
+					Vertex<Integer> vertex1 = new Vertex<Integer>(Integer.valueOf(values[0]));
+					Vertex<Integer> vertex2 = new Vertex<Integer>(Integer.valueOf(values[1]));
 
 					graph.connect(vertex1, vertex2);
 				}
@@ -41,47 +43,64 @@ public class GraphManipulator implements Manipulator {
 	}
 
 	@Override
-	public int getVertexNumber(Graph graph) {
-		return 0;
+	public int getVertexNumber(Graph<Integer> graph) {
+		return graph.numberVertex();
 	}
 
 	@Override
-	public int getEdgeNumber(Graph graph) {
-		return 0;
+	public int getEdgeNumber(Graph<Integer> graph) {
+		Set<Edge<Integer>> edgesGraph = new HashSet<>();
+		
+		for (Vertex<Integer> vertex: graph.getNodes()) {
+			edgesGraph.addAll(vertex.getEdges());
+		}
+		
+		return edgesGraph.size();
 	}
 
 	@Override
-	public float getMeanEdge(Graph graph) {
-		return 0;
+	public float getMeanEdge(Graph<Integer> graph) {
+		float sumDegree = 0;
+		float meanEdge = 0;
+		
+		for (Vertex<Integer> vertex: graph.getNodes()) {
+			sumDegree += vertex.degree();
+		}
+		
+		if(graph.getNodes().size() > 0) {
+			meanEdge = (sumDegree/graph.getNodes().size());
+		}
+		
+		return meanEdge;
 	}
 
 	@Override
-	public String graphRepresentation(Graph graph, String type) {
+	public String graphRepresentation(Graph<Integer> graph, String type) {
 		return null;
 	}
 
 	@Override
-	public String BFS(Graph graph, Vertex vertex) {
+	public String BFS(Graph<Integer> graph, Vertex<Integer> vertex) {
 		return null;
 	}
 
 	@Override
-	public String DFS(Graph graph, Vertex vertex) {
+	public String DFS(Graph<Integer> graph, Vertex<Integer> vertex) {
 		return null;
 	}
 
 	@Override
-	public String SCC(Graph graph) {
+	public String SCC(Graph<Integer> graph) {
 		return null;
 	}
 
 	@Override
-	public String shortestPath(Vertex vertex1, Vertex vertex2) {
+	public String shortestPath(Vertex<Integer> vertex1, Vertex<Integer> vertex2) {
 		return null;
 	}
 
 	@Override
-	public String MST(Graph graph) {
+	public String MST(Graph<Integer> graph) {
 		return null;
 	}
 }
