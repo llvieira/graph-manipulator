@@ -38,9 +38,8 @@ public class GraphManipulatorTest {
 	}
 	
 	@Test
-	public void testGetEdgeNumber() {
+	public void getVertexNumber() {
 		Graph<Integer> graphOne = mockGraph();
-		Graph<Integer> graphTwo = new Graph<Integer>();
 		int expectedNumberVertex;
 		int numberAddedVertex;
 		
@@ -48,17 +47,31 @@ public class GraphManipulatorTest {
 		numberAddedVertex = 5;
 		
 		Assert.assertEquals(expectedNumberVertex, numberAddedVertex);
+	}
+	
+	@Test
+	public void testGetEdgeNumber() {
+		Graph<Integer> graphOne = mockGraph();
+		int expectedNumberEdges;
+		int numberAddedEdges;
 		
-		numberAddedVertex = 6;
+		expectedNumberEdges = this.graphManipulator.getEdgeNumber(graphOne);
+		numberAddedEdges = 4;
 		
-		for (int i = 0; i < numberAddedVertex; i++) {
-			Vertex<Integer> newVertex = new Vertex<Integer>(i); 
-			graphTwo.addVertex(newVertex);
-		}
+		Assert.assertEquals(expectedNumberEdges, numberAddedEdges);
+	}
+	
+	@Test
+	public void testGetMeanEdge() {
+		Graph<Integer> graphOne = mockGraph();
+		float expectedMeanEdge;
+		float numberMeanEdge;
+		float delta = 0;
 		
-	    expectedNumberVertex = this.graphManipulator.getVertexNumber(graphTwo);
+		expectedMeanEdge = this.graphManipulator.getMeanEdge(graphOne);
+		numberMeanEdge =  1.6f;
 		
-		Assert.assertEquals(expectedNumberVertex, numberAddedVertex);
+		Assert.assertEquals(expectedMeanEdge, numberMeanEdge, delta);
 	}
 	
 	private Graph<Integer> mockGraph() {

@@ -43,13 +43,14 @@ public class Graph<T> {
 		this.addVertex(vertex2);
 	}
 	
-	public void addVertex(Vertex<T> vertex) {
-		if (!this.contains(vertex)) {
-			this.nodes.add(vertex);
-		}
-	}
 	
 	public int numberVertex() {
 		return this.nodes.size();
+	}
+
+	private void addVertex(Vertex<T> vertex) {
+		if (! this.contains(vertex)) {
+			this.nodes.add(vertex);
+		}
 	}
 }

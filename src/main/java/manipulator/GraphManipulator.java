@@ -2,7 +2,9 @@ package manipulator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class GraphManipulator implements Manipulator {
 
@@ -47,7 +49,13 @@ public class GraphManipulator implements Manipulator {
 
 	@Override
 	public int getEdgeNumber(Graph<Integer> graph) {
-		return 0;
+		Set<Edge<Integer>> edgesGraph = new HashSet<>();
+		
+		for (Vertex<Integer> vertex: graph.getNodes()) {
+			edgesGraph.addAll(vertex.getEdges());
+		}
+		
+		return edgesGraph.size();
 	}
 
 	@Override
