@@ -19,16 +19,16 @@ public class GraphManipulatorTest {
 
 	@Test
 	public void testReadGraph() {
-		Graph graph = graphManipulator.readGraph(GRAPH_SAMPLE_PATH);
+		Graph<Integer> graph = graphManipulator.readGraph(GRAPH_SAMPLE_PATH);
 
-		List<Vertex> realNodes = graph.getNodes();
-		List<Vertex> mockNodes = mockGraph().getNodes();
+		List<Vertex<Integer>> realNodes = graph.getNodes();
+		List<Vertex<Integer>> mockNodes = mockGraph().getNodes();
 
 		for (int i = 0; i < realNodes.size(); i++) {
 			Assert.assertEquals(realNodes.get(i), mockNodes.get(i));
 
-			List<Edge> realEdges = realNodes.get(i).getEdges();
-			List<Edge> mockEdges = mockNodes.get(i).getEdges();
+			List<Edge<Integer>> realEdges = realNodes.get(i).getEdges();
+			List<Edge<Integer>> mockEdges = mockNodes.get(i).getEdges();
 
 			for (int j = 0; j < realEdges.size(); j++) {
 				Assert.assertEquals(realEdges.get(j).getEnd(), mockEdges.get(j).getEnd());
@@ -37,14 +37,38 @@ public class GraphManipulatorTest {
 		}
 	}
 	
-	private Graph mockGraph() {
-		Graph graph = new Graph();
+	@Test
+	public void testGetEdgeNumber() {
+		Graph<Integer> graphOne = mockGraph();
+		Graph<Integer> graphTwo = new Graph<Integer>();
+		int expectedNumberVertex;
+		int numberAddedVertex;
+		
+		expectedNumberVertex = this.graphManipulator.getVertexNumber(graphOne);
+		numberAddedVertex = 5;
+		
+		Assert.assertEquals(expectedNumberVertex, numberAddedVertex);
+		
+		numberAddedVertex = 6;
+		
+		for (int i = 0; i < numberAddedVertex; i++) {
+			Vertex<Integer> newVertex = new Vertex<Integer>(i); 
+			graphTwo.addVertex(newVertex);
+		}
+		
+	    expectedNumberVertex = this.graphManipulator.getVertexNumber(graphTwo);
+		
+		Assert.assertEquals(expectedNumberVertex, numberAddedVertex);
+	}
+	
+	private Graph<Integer> mockGraph() {
+		Graph<Integer> graph = new Graph<Integer>();
 
-		Vertex vertex1 = new Vertex(1);
-		Vertex vertex2 = new Vertex(2);
-		Vertex vertex3 = new Vertex(3);
-		Vertex vertex4 = new Vertex(4);
-		Vertex vertex5 = new Vertex(5);
+		Vertex<Integer> vertex1 = new Vertex<Integer>(1);
+		Vertex<Integer> vertex2 = new Vertex<Integer>(2);
+		Vertex<Integer> vertex3 = new Vertex<Integer>(3);
+		Vertex<Integer> vertex4 = new Vertex<Integer>(4);
+		Vertex<Integer> vertex5 = new Vertex<Integer>(5);
 
 		graph.connect(vertex1, vertex2);
 		graph.connect(vertex2, vertex3);

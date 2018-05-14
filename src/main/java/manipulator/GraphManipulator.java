@@ -7,20 +7,20 @@ import java.util.Scanner;
 public class GraphManipulator implements Manipulator {
 
 	@Override
-	public Graph readGraph(String path) {
+	public Graph<Integer> readGraph(String path) {
 		try {
 			File file = new File(path);
 			Scanner scanner = new Scanner(file);
 
-			Graph graph = new Graph();
+			Graph<Integer> graph = new Graph<Integer>();
 
 			while (scanner.hasNext()) {
 				String line = scanner.nextLine();
 				String[] values = line.trim().split(" ");
 
 				if (values.length > 1) {
-					Vertex vertex1 = new Vertex(Integer.valueOf(values[0]));
-					Vertex vertex2 = new Vertex(Integer.valueOf(values[1]));
+					Vertex<Integer> vertex1 = new Vertex<Integer>(Integer.valueOf(values[0]));
+					Vertex<Integer> vertex2 = new Vertex<Integer>(Integer.valueOf(values[1]));
 
 					graph.connect(vertex1, vertex2);
 				}
@@ -41,47 +41,47 @@ public class GraphManipulator implements Manipulator {
 	}
 
 	@Override
-	public int getVertexNumber(Graph graph) {
+	public int getVertexNumber(Graph<Integer> graph) {
+		return graph.numberVertex();
+	}
+
+	@Override
+	public int getEdgeNumber(Graph<Integer> graph) {
 		return 0;
 	}
 
 	@Override
-	public int getEdgeNumber(Graph graph) {
+	public float getMeanEdge(Graph<Integer> graph) {
 		return 0;
 	}
 
 	@Override
-	public float getMeanEdge(Graph graph) {
-		return 0;
-	}
-
-	@Override
-	public String graphRepresentation(Graph graph, String type) {
+	public String graphRepresentation(Graph<Integer> graph, String type) {
 		return null;
 	}
 
 	@Override
-	public String BFS(Graph graph, Vertex vertex) {
+	public String BFS(Graph<Integer> graph, Vertex<Integer> vertex) {
 		return null;
 	}
 
 	@Override
-	public String DFS(Graph graph, Vertex vertex) {
+	public String DFS(Graph<Integer> graph, Vertex<Integer> vertex) {
 		return null;
 	}
 
 	@Override
-	public String SCC(Graph graph) {
+	public String SCC(Graph<Integer> graph) {
 		return null;
 	}
 
 	@Override
-	public String shortestPath(Vertex vertex1, Vertex vertex2) {
+	public String shortestPath(Vertex<Integer> vertex1, Vertex<Integer> vertex2) {
 		return null;
 	}
 
 	@Override
-	public String MST(Graph graph) {
+	public String MST(Graph<Integer> graph) {
 		return null;
 	}
 }

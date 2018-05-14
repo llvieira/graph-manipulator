@@ -1,14 +1,14 @@
 package manipulator;
 
-public class Edge {
+public class Edge<T> {
 
     private static final Float DEFAULT_WEIGHT = 1f;
 
-    private Vertex start;
-    private Vertex end;
+    private Vertex<T> start;
+    private Vertex<T> end;
     private Float weight;
 
-    public Edge(Vertex end, Vertex start, Float weight) {
+    public Edge(Vertex<T> end, Vertex<T> start, Float weight) {
         this.end = end;
         this.start = start;
 
@@ -19,23 +19,23 @@ public class Edge {
         }
     }
 
-    public Edge(Vertex end, Vertex start) {
+    public Edge(Vertex<T> end, Vertex<T> start) {
         this(end, start, null);
     }
 
-    public Vertex getEnd() {
+    public Vertex<T> getEnd() {
         return end;
     }
 
-    public void setEnd(Vertex end) {
+    public void setEnd(Vertex<T> end) {
         this.end = end;
     }
     
-    public Vertex getStart() {
+    public Vertex<T> getStart() {
         return start;
     }
     
-    public void setStart(Vertex start) {
+    public void setStart(Vertex<T> start) {
         this.start = start;
     }
 

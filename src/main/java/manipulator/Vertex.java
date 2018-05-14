@@ -5,16 +5,15 @@ import java.util.List;
 
 public class Vertex<T> {
 	
-	// Switch to generic type
-    private T value;
-    private List<Edge> edges;
+	private T value;
+    private List<Edge<T>> edges;
 
     public Vertex(T value) {
         this.value = value;
         this.edges = new ArrayList<>();
     }
 
-    public Vertex(T value, List<Edge> edges) {
+    public Vertex(T value, List<Edge<T>> edges) {
         this.value = value;
         this.edges = edges;
     }
@@ -27,14 +26,18 @@ public class Vertex<T> {
         this.value = value;
     }
 
-    public List<Edge> getEdges() {
+    public List<Edge<T>> getEdges() {
         return edges;
     }
 
-    public void setEdges(List<Edge> edges) {
+    public void setEdges(List<Edge<T>> edges) {
         this.edges = edges;
     }
     
+    public int degree() {
+    	return this.edges.size();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
