@@ -60,7 +60,18 @@ public class GraphManipulator implements Manipulator {
 
 	@Override
 	public float getMeanEdge(Graph<Integer> graph) {
-		return 0;
+		float sumDegree = 0;
+		float meanEdge = 0;
+		
+		for (Vertex<Integer> vertex: graph.getNodes()) {
+			sumDegree += vertex.degree();
+		}
+		
+		if(graph.getNodes().size() > 0) {
+			meanEdge = (sumDegree/graph.getNodes().size());
+		}
+		
+		return meanEdge;
 	}
 
 	@Override
