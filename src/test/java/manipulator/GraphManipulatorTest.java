@@ -11,7 +11,7 @@ public class GraphManipulatorTest {
 	private final String GRAPH_SAMPLE_PATH = "src/test/java/manipulator/samples/graph-sample.txt";
 
 	private GraphManipulator graphManipulator;
-
+	
 	@Before
 	public void setUp() {
 		this.graphManipulator = new GraphManipulator();
@@ -74,9 +74,24 @@ public class GraphManipulatorTest {
 		Assert.assertEquals(expectedMeanEdge, numberMeanEdge, delta);
 	}
 	
+	@Test
+	public void testBFS() {
+		Graph<Integer> graphOne = mockGraphFigureOne();
+		Vertex<Integer> firstVertex = graphOne.getNodes().get(0);
+		
+		String realBFS = this.graphManipulator.BFS(graphOne, firstVertex);
+		String expectedBFS =  "1 - 0 -\n" + 
+							  "2 - 1 1\n" + 
+							  "3 - 2 5\n" + 
+							  "4 - 2 5\n" + 
+							  "5 - 1 1";
+		
+		Assert.assertEquals(expectedBFS, realBFS);
+	}
+	
 	private Graph<Integer> mockGraph() {
 		Graph<Integer> graph = new Graph<Integer>();
-
+		
 		Vertex<Integer> vertex1 = new Vertex<Integer>(1);
 		Vertex<Integer> vertex2 = new Vertex<Integer>(2);
 		Vertex<Integer> vertex3 = new Vertex<Integer>(3);
@@ -86,6 +101,24 @@ public class GraphManipulatorTest {
 		graph.connect(vertex1, vertex2);
 		graph.connect(vertex2, vertex3);
 		graph.connect(vertex3, vertex4);
+		graph.connect(vertex4, vertex5);
+
+		return graph;
+	}
+	
+	private Graph<Integer> mockGraphFigureOne() {
+		Graph<Integer> graph = new Graph<Integer>();
+
+		Vertex<Integer> vertex1 = new Vertex<Integer>(1);
+		Vertex<Integer> vertex2 = new Vertex<Integer>(2);
+		Vertex<Integer> vertex3 = new Vertex<Integer>(3);
+		Vertex<Integer> vertex4 = new Vertex<Integer>(4);
+		Vertex<Integer> vertex5 = new Vertex<Integer>(5);
+
+		graph.connect(vertex1, vertex2);
+		graph.connect(vertex1, vertex5);
+		graph.connect(vertex2, vertex5);
+		graph.connect(vertex5, vertex3);
 		graph.connect(vertex4, vertex5);
 
 		return graph;

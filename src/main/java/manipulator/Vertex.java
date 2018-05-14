@@ -37,6 +37,20 @@ public class Vertex<T> {
     public int degree() {
     	return this.edges.size();
     }
+    
+    public List<Vertex<T>> neighbors() {
+    	List<Vertex<T>> neighbors = new ArrayList<>();
+    	
+    	for (Edge<T> edge: this.edges) {
+    		if (this.equals(edge.getStart())) {
+    			neighbors.add(edge.getEnd());
+    		} else {
+    			neighbors.add(edge.getStart());
+    		}
+    	}
+    	
+    	return neighbors;
+    }
 
     @Override
     public boolean equals(Object o) {
