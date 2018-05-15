@@ -129,7 +129,7 @@ public class GraphManipulatorTest {
 	public void testShortestPath() {
 		Graph<Integer> graphOne = mockGraphFigureOne();
 		Vertex<Integer> firstVertex = graphOne.getNodes().get(0);
-		Vertex<Integer> thirdVertex = graphOne.getNodes().get(3);
+		Vertex<Integer> thirdVertex = graphOne.getNodes().get(2);
 
 		String result = this.graphManipulator.shortestPath(firstVertex, thirdVertex);
 		String expectedResult = "1 5 3 ";
