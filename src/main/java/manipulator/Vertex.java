@@ -3,45 +3,53 @@ package manipulator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Vertex {
-	
-    private Integer value;
-    private boolean visited;
-    private List<Edge> edges;
+public class Vertex<T> {
 
-    public Vertex(Integer value) {
+	private T value;
+    private List<Edge<T>> edges;
+
+    public Vertex(T value) {
         this.value = value;
-        this.visited = false;
         this.edges = new ArrayList<>();
     }
 
-    public Vertex(Integer value, List<Edge> edges) {
-        this(value);
+    public Vertex(T value, List<Edge<T>> edges) {
+        this.value = value;
         this.edges = edges;
     }
 
-    public Integer getValue() {
+    public T getValue() {
         return value;
     }
 
-    public void setValue(Integer value) {
+    public void setValue(T value) {
         this.value = value;
     }
 
-    public boolean isVisited() {
-        return this.visited;
-    }
-
-    public void setVisited(boolean visited) {
-        this.visited = visited;
-    }
-
-    public List<Edge> getEdges() {
+    public List<Edge<T>> getEdges() {
         return edges;
     }
 
-    public void setEdges(List<Edge> edges) {
+    public void setEdges(List<Edge<T>> edges) {
         this.edges = edges;
+    }
+    
+    public int degree() {
+    	return this.edges.size();
+    }
+    
+    public List<Vertex<T>> neighbors() {
+    	List<Vertex<T>> neighbors = new ArrayList<>();
+    	
+    	for (Edge<T> edge: this.edges) {
+    		if (this.equals(edge.getStart())) {
+    			neighbors.add(edge.getEnd());
+    		} else {
+    			neighbors.add(edge.getStart());
+    		}
+    	}
+    	
+    	return neighbors;
     }
 
     @Override

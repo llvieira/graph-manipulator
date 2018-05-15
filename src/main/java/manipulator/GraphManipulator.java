@@ -7,20 +7,20 @@ import java.util.*;
 public class GraphManipulator implements Manipulator {
 
 	@Override
-	public Graph readGraph(String path) {
+	public Graph<Integer> readGraph(String path) {
 		try {
 			File file = new File(path);
 			Scanner scanner = new Scanner(file);
 
-			Graph graph = new Graph();
+			Graph<Integer> graph = new Graph<Integer>();
 
 			while (scanner.hasNext()) {
 				String line = scanner.nextLine();
 				String[] values = line.trim().split(" ");
 
 				if (values.length > 1) {
-					Vertex vertex1 = new Vertex(Integer.valueOf(values[0]));
-					Vertex vertex2 = new Vertex(Integer.valueOf(values[1]));
+					Vertex<Integer> vertex1 = new Vertex<>(Integer.valueOf(values[0]));
+					Vertex<Integer> vertex2 = new Vertex<>(Integer.valueOf(values[1]));
 
 					graph.connect(vertex1, vertex2);
 				}
@@ -41,109 +41,145 @@ public class GraphManipulator implements Manipulator {
 	}
 
 	@Override
-	public int getVertexNumber(Graph graph) {
-		return 0;
+	public int getVertexNumber(Graph<Integer> graph) {
+		return graph.numberVertex();
 	}
 
 	@Override
-	public int getEdgeNumber(Graph graph) {
-		return 0;
+	public int getEdgeNumber(Graph<Integer> graph) {
+		Set<Edge<Integer>> edgesGraph = new HashSet<>();
+		
+		for (Vertex<Integer> vertex: graph.getNodes()) {
+			edgesGraph.addAll(vertex.getEdges());
+		}
+		
+		return edgesGraph.size();
 	}
 
 	@Override
-	public float getMeanEdge(Graph graph) {
-		return 0;
+	public float getMeanEdge(Graph<Integer> graph) {
+		float sumDegree = 0;
+		float meanEdge = 0;
+		
+		for (Vertex<Integer> vertex: graph.getNodes()) {
+			sumDegree += vertex.degree();
+		}
+		
+		if(graph.getNodes().size() > 0) {
+			meanEdge = (sumDegree/graph.getNodes().size());
+		}
+		
+		return meanEdge;
 	}
 
 	@Override
-	public String graphRepresentation(Graph graph, String type) {
+	public String graphRepresentation(Graph<Integer> graph, String type) {
 		return null;
 	}
 
 	@Override
-	public String BFS(Graph graph, Vertex vertex) {
-		return null;
+	public String BFS(Graph<Integer> graph, Vertex<Integer> vertex) {
+		String stringBfsOut = "";
+		
+		if(graph.getNodes().size() > 0) {
+		
+			Map<Integer, Integer[]> bfsOutput = new HashMap<>();
+			Queue<Vertex<Integer>> queue = new LinkedList<>();
+		
+			Integer[] initialLevel = {0, null};
+			bfsOutput.put(vertex.getValue(), initialLevel);
+			queue.add(vertex);
+		
+			BFS(queue, bfsOutput);
+			
+			stringBfsOut = formatSearchOutput(bfsOutput);
+			
+			return stringBfsOut;
+		}
+		
+		return stringBfsOut;
 	}
 
-	@Override
-	public String DFS(Graph graph, Vertex vertex) {
-		DFSUtil(vertex);
+	private void BFS(Queue<Vertex<Integer>> queue, Map<Integer, Integer[]> bfsOutput) {
+		if (!queue.isEmpty()) {
+			Vertex<Integer> visited = queue.poll();
+			Integer levelVisited = bfsOutput.get(visited.getValue())[0];
+			Integer[] levelNeighbors = {++levelVisited, visited.getValue()};
 
-		for (Vertex otherVertices : graph.getNodes()) {
-			if (! otherVertices.isVisited()) {
-				DFSUtil(otherVertices);
+			for (Vertex<Integer> neighbor: visited.neighbors()) {
+				if(!bfsOutput.containsKey(neighbor.getValue())) {
+					bfsOutput.put(neighbor.getValue(), levelNeighbors);
+					queue.add(neighbor);
+				}
+			}
+
+			BFS(queue, bfsOutput);
+		}
+	}
+
+	public String DFS(Graph<Integer> graph, Vertex<Integer> vertex) {
+		String stringDfsOut = "";
+
+		if (graph.getNodes().size() > 0) {
+			Map<Integer, Integer[]> dfsOutput = new HashMap<>();
+
+			Integer[] initialLevel = {0, null};
+			dfsOutput.put(vertex.getValue(), initialLevel);
+
+			DFS(vertex, dfsOutput);
+
+			stringDfsOut = formatSearchOutput(dfsOutput);
+		}
+
+		return stringDfsOut;
+	}
+
+	private void DFS(Vertex<Integer> vertex, Map<Integer, Integer[]> dfsOutput) {
+		Integer levelVisited = dfsOutput.get(vertex.getValue())[0];
+		Integer[] levelNeighbors = {++levelVisited, vertex.getValue()};
+
+		for (Vertex<Integer> neighbor: vertex.neighbors()) {
+			if(! dfsOutput.containsKey(neighbor.getValue())) {
+				dfsOutput.put(neighbor.getValue(), levelNeighbors);
+				DFS(neighbor, dfsOutput);
+			}
+		}
+	}
+
+	private String formatSearchOutput(Map<Integer, Integer[]> output) {
+		String string = "";
+
+		List<Integer> orderedVertex = new ArrayList<>(output.keySet());
+		Collections.sort(orderedVertex);
+
+		for (int i = 0; i < orderedVertex.size(); i++) {
+			Integer value = orderedVertex.get(i);
+			Integer levelVertex = output.get(value)[0];
+			String parentVertex = (output.get(value)[1] == null) ?
+					"-":String.valueOf(output.get(value)[1]);
+
+			if (i == orderedVertex.size() - 1) {
+				string += value + " - " + levelVertex + " "+ parentVertex;
+			} else {
+				string += value + " - " + levelVertex + " "+ parentVertex + "\n";
 			}
 		}
 
-		clearVisitedProperty(graph);
-		return "";
-	}
-
-	private void DFSUtil(Vertex vertex) {
-		vertex.setVisited(true);
-
-		for (Edge edge : vertex.getEdges()) {
-			Vertex adjacent = getAdjacent(vertex, edge);
-			if (! adjacent.isVisited()) {
-
-				System.out.print(vertex.getValue() + " - " + adjacent.getValue());
-				System.out.println();
-
-				DFSUtil(adjacent);
-			}
-		}
-	}
-
-	private Vertex getAdjacent(Vertex vertex, Edge edge) {
-		if (edge.getEnd().equals(vertex)) {
-			return edge.getStart();
-		}
-
-		return edge.getEnd();
+		return string;
 	}
 
 	@Override
-	public String SCC(Graph graph) {
+	public String shortestPath(Vertex<Integer> vertex1, Vertex<Integer> vertex2) {
 		return null;
 	}
 
 	@Override
-	public String shortestPath(Vertex vertex1, Vertex vertex2) {
+	public String MST(Graph<Integer> graph) {
 		return null;
 	}
 
 	@Override
-	public String MST(Graph graph) {
-		return null;
-	}
-
-	private void clearVisitedProperty(Graph graph) {
-		for (Vertex vertex : graph.getNodes()) {
-			vertex.setVisited(false);
-		}
-	}
-
-	public static void main(String[] args) {
-		GraphManipulator gm = new GraphManipulator();
-
-		Graph graph = new Graph();
-
-		Vertex v1 = new Vertex(1);
-		Vertex v2 = new Vertex(2);
-		Vertex v3 = new Vertex(3);
-		Vertex v4 = new Vertex(4);
-		Vertex v5 = new Vertex(5);
-
-		graph.connect(v1, v2);
-		graph.connect(v1, v3);
-		graph.connect(v1, v4);
-		graph.connect(v3, v5);
-
-//		graph.connect(v1, v3);
-//		graph.connect(v3, v5);
-//		graph.connect(v1, v4);
-//		graph.connect(v4, v2);
-
-		gm.DFS(graph, v1);
+	public boolean connected(Graph<Integer> graph) {
+		return false;
 	}
 }
