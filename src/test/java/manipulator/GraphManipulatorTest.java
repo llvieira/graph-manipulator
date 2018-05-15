@@ -103,7 +103,19 @@ public class GraphManipulatorTest {
 
 		Assert.assertEquals(expectedDFS, realDFS);
 	}
-	
+
+	@Test
+	public void testShortestPath() {
+		Graph<Integer> graphOne = mockGraphFigureOne();
+		Vertex<Integer> firstVertex = graphOne.getNodes().get(0);
+		Vertex<Integer> thirdVertex = graphOne.getNodes().get(3);
+
+		String result = this.graphManipulator.shortestPath(firstVertex, thirdVertex);
+		String expectedResult = "1 5 3 ";
+
+		Assert.assertEquals(result, expectedResult);
+	}
+
 	@Test
 	public void testConnected() {
 		Graph<Integer> graph = mockGraphDisconnected();
