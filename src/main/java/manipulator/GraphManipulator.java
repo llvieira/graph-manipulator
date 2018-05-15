@@ -126,10 +126,31 @@ public class GraphManipulator implements Manipulator {
 		
 		return stringBfsOut;
 	}
-	
+
+	// Shortest path using BFS, it doesn't work for weighted graph
 	@Override
 	public String shortestPath(Vertex<Integer> vertex1, Vertex<Integer> vertex2) {
-		return null;
+		List<Integer> path = new ArrayList<>();
+		path.add(vertex2.getValue());
+
+		Map<Integer, Integer[]> bfsOutput = BFS(vertex1);
+
+		Integer dad = bfsOutput.get(vertex2.getValue())[1];
+
+		while (! dad.equals(vertex1.getValue())) {
+			path.add(dad);
+			dad = bfsOutput.get(dad)[1];
+		}
+
+		path.add(vertex1.getValue());
+
+		String result = "";
+
+		for (int i = path.size() - 1; i >= 0; i--) {
+			result += path.get(i) + " ";
+		}
+
+		return result;
 	}
 
 	@Override
@@ -183,6 +204,7 @@ public class GraphManipulator implements Manipulator {
 		}
 	}
 
+	@Override
 	public String DFS(Graph<Integer> graph, Vertex<Integer> vertex) {
 		String stringDfsOut = "";
 
