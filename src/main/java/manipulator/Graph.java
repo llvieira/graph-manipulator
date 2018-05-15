@@ -23,34 +23,54 @@ public class Graph<T> {
 		return this.nodes.contains(vertex);
 	}
 
-	public void connect(Vertex<T> vertex1, Vertex<T> vertex2) {
-		Edge<T> edge = new Edge<T>(vertex2, vertex1);
+	public boolean connect(Vertex<T> vertex1, Vertex<T> vertex2) {
+		int indexVertex1 = this.nodes.indexOf(vertex1);
+		int indexVertex2 = this.nodes.indexOf(vertex2);
 		
-		vertex1.getEdges().add(edge);
-		vertex2.getEdges().add(edge);
-		
-		this.addVertex(vertex1);
-		this.addVertex(vertex2);
+		if (indexVertex1 != -1 && indexVertex2 != -1) {
+			Vertex<T> vertexOne = this.nodes.get(indexVertex1);
+			Vertex<T> vertexTwo = this.nodes.get(indexVertex2);
+			
+			Edge<T> edge = new Edge<T>(vertex2, vertex1);
+			
+			vertexOne.getEdges().add(edge);
+			vertexTwo.getEdges().add(edge);
+			
+			return true;
+		}
+				
+		return false;
 	}
 
-	public void connect(Vertex<T> vertex1, Vertex<T> vertex2, Float weight) {
-		Edge<T> edge = new Edge<T>(vertex2, vertex1, weight);
-			
-		vertex1.getEdges().add(edge);
-		vertex2.getEdges().add(edge);
+	public boolean connect(Vertex<T> vertex1, Vertex<T> vertex2, Float weight) {
+		int indexVertex1 = this.nodes.indexOf(vertex1);
+		int indexVertex2 = this.nodes.indexOf(vertex2);
 		
-		this.addVertex(vertex1);
-		this.addVertex(vertex2);
+		if (indexVertex1 != -1 && indexVertex2 != -1) {
+			Vertex<T> vertexOne = this.nodes.get(indexVertex1);
+			Vertex<T> vertexTwo = this.nodes.get(indexVertex2);
+			
+			Edge<T> edge = new Edge<T>(vertex2, vertex1, weight);
+			
+			vertexOne.getEdges().add(edge);
+			vertexTwo.getEdges().add(edge);
+			
+			return true;
+		}
+		
+		return false;
 	}
 	
+	public boolean addVertex(Vertex<T> vertex) {
+		if (! this.contains(vertex)) {
+			this.nodes.add(vertex);
+			return true;
+		}
+		
+		return false;
+	}
 	
 	public int numberVertex() {
 		return this.nodes.size();
-	}
-
-	private void addVertex(Vertex<T> vertex) {
-		if (! this.contains(vertex)) {
-			this.nodes.add(vertex);
-		}
 	}
 }
