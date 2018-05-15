@@ -6,15 +6,15 @@ import java.util.List;
 public class Graph<T> {
 
 	private List<Vertex<T>> nodes;
-	private Boolean weight;
+	private Boolean isWeight;
 	
 	
 	public Boolean getWeight() {
-		return weight;
+		return isWeight;
 	}
 
 	public void setWeight(Boolean weight) {
-		this.weight = weight;
+		this.isWeight = weight;
 	}
 
 	public Graph() {
