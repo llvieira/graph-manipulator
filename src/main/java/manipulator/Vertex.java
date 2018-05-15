@@ -7,18 +7,15 @@ public class Vertex<T> {
 
 	private T value;
     private List<Edge<T>> edges;
-    private Boolean coveraged;
 
     public Vertex(T value) {
         this.value = value;
         this.edges = new ArrayList<>();
-        this.setCoveraged(false);
     }
 
     public Vertex(T value, List<Edge<T>> edges) {
         this.value = value;
         this.edges = edges;
-        this.setCoveraged(false);
     }
 
     public T getValue() {
@@ -69,12 +66,4 @@ public class Vertex<T> {
     public int hashCode() {
         return value != null ? value.hashCode() : 0;
     }
-
-	public Boolean getCoveraged() {
-		return coveraged;
-	}
-
-	public void setCoveraged(Boolean coveraged) {
-		this.coveraged = coveraged;
-	}
 }

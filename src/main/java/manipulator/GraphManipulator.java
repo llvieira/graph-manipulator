@@ -177,7 +177,15 @@ public class GraphManipulator implements Manipulator {
 			edges.remove(connection);
 		}
 		
-		return null;
+		String output = "";
+		for (int i = 0; i < mst.getNodes().size(); i++) {
+			for (Edge<Integer> edge : mst.getNodes().get(i).getEdges()) {
+				output += "Parent: " + edge.getStart().getValue() +
+				  " Level: " + i + System.lineSeparator();
+			}
+		}
+		return output;
+		
 	}
 	
 	public Edge<Integer> min(List<Edge<Integer>> edges) {
