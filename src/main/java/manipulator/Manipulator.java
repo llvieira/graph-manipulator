@@ -18,9 +18,9 @@ public interface Manipulator {
 
     String DFS(Graph<Integer> graph, Vertex<Integer> vertex);
 
-    String SCC(Graph<Integer> graph);
-
     String shortestPath(Vertex<Integer> vertex1, Vertex<Integer> vertex2);
 
     String MST(Graph<Integer> graph);
+
+    boolean connected(Graph<Integer> graph);
 }

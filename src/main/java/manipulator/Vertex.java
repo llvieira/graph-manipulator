@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Vertex<T> {
-	
+
 	private T value;
     private List<Edge<T>> edges;
 

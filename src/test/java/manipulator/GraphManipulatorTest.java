@@ -88,6 +88,21 @@ public class GraphManipulatorTest {
 		
 		Assert.assertEquals(expectedBFS, realBFS);
 	}
+
+	@Test
+	public void testDFS() {
+		Graph<Integer> graphOne = mockGraphFigureOne();
+		Vertex<Integer> firstVertex = graphOne.getNodes().get(0);
+
+		String realDFS = this.graphManipulator.DFS(graphOne, firstVertex);
+		String expectedDFS =  "1 - 0 -\n" +
+				"2 - 1 1\n" +
+				"3 - 3 5\n" +
+				"4 - 3 5\n" +
+				"5 - 2 2";
+
+		Assert.assertEquals(expectedDFS, realDFS);
+	}
 	
 	private Graph<Integer> mockGraph() {
 		Graph<Integer> graph = new Graph<Integer>();
@@ -109,11 +124,11 @@ public class GraphManipulatorTest {
 	private Graph<Integer> mockGraphFigureOne() {
 		Graph<Integer> graph = new Graph<Integer>();
 
-		Vertex<Integer> vertex1 = new Vertex<Integer>(1);
-		Vertex<Integer> vertex2 = new Vertex<Integer>(2);
-		Vertex<Integer> vertex3 = new Vertex<Integer>(3);
-		Vertex<Integer> vertex4 = new Vertex<Integer>(4);
-		Vertex<Integer> vertex5 = new Vertex<Integer>(5);
+		Vertex<Integer> vertex1 = new Vertex<>(1);
+		Vertex<Integer> vertex2 = new Vertex<>(2);
+		Vertex<Integer> vertex3 = new Vertex<>(3);
+		Vertex<Integer> vertex4 = new Vertex<>(4);
+		Vertex<Integer> vertex5 = new Vertex<>(5);
 
 		graph.connect(vertex1, vertex2);
 		graph.connect(vertex1, vertex5);
