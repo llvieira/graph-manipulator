@@ -155,7 +155,39 @@ public class GraphManipulator implements Manipulator {
 
 	@Override
 	public String MST(Graph<Integer> graph) {
+		Graph<Integer> mst = new Graph<>();
+		int root_index = 0;
+		
+		Vertex<Integer> initial = graph.getNodes().get(root_index);
+		List<Edge<Integer>> edges = initial.getEdges();
+		graph.addVertex(initial);
+		
+		
+		while(mst.getNodes().size() <= graph.getNodes().size()) {
+			Edge<Integer> connection = null;
+			do {
+				connection = min(edges);
+				if (mst.contains(connection.getEnd())) {
+					edges.remove(connection);
+				}
+				
+			} while (mst.contains(connection.getEnd()));
+			mst.connect(connection.getStart(), connection.getEnd());
+			edges.addAll(connection.getEnd().getEdges());
+			edges.remove(connection);
+		}
+		
 		return null;
+	}
+	
+	public Edge<Integer> min(List<Edge<Integer>> edges) {
+		Edge<Integer> nextSteap = edges.get(0);
+		
+		for (Edge<Integer> edge : edges) {
+			if (nextSteap.getWeight() > edge.getWeight())
+				nextSteap = edge;
+		}
+		return nextSteap;
 	}
 
 	@Override
