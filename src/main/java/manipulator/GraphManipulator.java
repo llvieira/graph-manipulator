@@ -6,6 +6,7 @@ import java.util.*;
 
 public class GraphManipulator implements Manipulator {
 
+	private static final String BREAK_LINE = System.getProperty("line.separator");
 	@Override
 	public Graph<Integer> readGraph(String path) {
 		try {
@@ -32,6 +33,8 @@ public class GraphManipulator implements Manipulator {
 			}
 
 			scanner.close();
+			
+			graph.setWeight(false);
 
 			return graph;
 		} catch (FileNotFoundException e) {
@@ -67,7 +70,9 @@ public class GraphManipulator implements Manipulator {
 			}
 
 			scanner.close();
-
+			
+			graph.setWeight(true);
+			
 			return graph;
 		} catch (FileNotFoundException e) {
 			System.out.println("File" + path + " does not exists.");
@@ -108,9 +113,174 @@ public class GraphManipulator implements Manipulator {
 	}
 
 	@Override
-	public String graphRepresentation(Graph<Integer> graph, String type) {
-		return null;
-	}
+    public String graphRepresentation(Graph<Integer> graph, String type) {
+		if(graph.getWeight()) {
+	        if(type.equals("AM")){
+	            return graphRepresentationWeightAM(graph);
+	        }else if(type.equals("AL")){
+	            return graphRepresentationWeightAL(graph);
+	        }
+		}else {
+			if(type.equals("AM")){
+	            return graphRepresentationAM(graph);
+	        }else if(type.equals("AL")){
+	            return graphRepresentationAL(graph);
+	        }
+		}
+       
+        return null;
+    }
+	
+private String graphRepresentationAM(Graph<Integer> graph){
+        
+    	int numberVertex = graph.numberVertex();
+        List<Vertex<Integer>> nodes = graph.getNodes(); 
+        Map<Vertex<Integer>, Set<Vertex>> mapAdjacents = new HashMap<Vertex<Integer>, Set<Vertex>>();
+       
+        for(Vertex node: nodes){
+            ArrayList<Edge> edges = (ArrayList) node.getEdges();
+            Set<Vertex> adjacents = new HashSet<Vertex>();
+            for(Edge edge : edges) {
+            	if(!edge.getEnd().equals(node)) {
+            		adjacents.add(edge.getEnd());
+            	}else {
+            		adjacents.add(edge.getStart());
+            	}
+            }
+            mapAdjacents.put(node, adjacents);
+        }
+        
+        
+        
+        String resp = " ";
+       
+        for(int i=1;i<=numberVertex;i++) {
+        	resp += " " + i;
+        }
+        
+        resp += BREAK_LINE;
+        
+        
+        for(Vertex verts : mapAdjacents.keySet()) {
+        	resp += verts.getValue();
+        	for(int i = 0;i<numberVertex;i++) {
+        		if(mapAdjacents.get(verts).contains(nodes.get(i))) {
+        			resp +=" "+1;
+        		}else {
+        			resp +=" "+0	;
+        		}
+        	}
+        	resp+=BREAK_LINE;
+        }
+        
+        return resp;
+       
+       
+    }
+ 
+    private String graphRepresentationWeightAL(Graph<Integer> graph){
+    	
+    	int numberVertex = graph.numberVertex();
+        List<Vertex<Integer>> nodes = graph.getNodes(); 
+     
+        String resp = "";
+        
+        for(Vertex verts : nodes) {
+        	resp += verts.getValue() +" -";
+        	ArrayList<Edge> edges = (ArrayList<Edge>) verts.getEdges();
+        	for(Edge edge : edges) {
+        		if(!edge.getEnd().equals(verts)) {
+        			resp +=" "+edge.getEnd().getValue()+"("+edge.getWeight()+")";
+        		}else {
+        			resp +=" "+edge.getStart().getValue()+"("+edge.getWeight()+")";
+        		}
+        	}
+        	resp+=BREAK_LINE;
+        }
+       
+       
+        return resp;
+    }
+   
+    private String graphRepresentationWeightAM(Graph<Integer> graph){
+        
+    	int numberVertex = graph.numberVertex();
+        List<Vertex<Integer>> nodes = graph.getNodes(); 
+        Map<Vertex<Integer>, Map<Vertex,Edge>> mapAdjacents = new HashMap<Vertex<Integer>, Map<Vertex,Edge>>();
+        
+        for(Vertex node: nodes){
+            ArrayList<Edge> edges = (ArrayList) node.getEdges();
+            Map<Vertex,Edge> adjacents = new HashMap<Vertex,Edge>();
+            for(Edge edge : edges) {
+            	if(!edge.getEnd().equals(node)) {
+            		adjacents.put(edge.getEnd(),edge);
+            	}else {
+            		adjacents.put(edge.getStart(),edge);
+            	}
+            }
+            mapAdjacents.put(node, adjacents);
+        }
+        
+        String resp = " ";
+       
+        for(int i=1;i<=numberVertex;i++) {
+        	resp += " " + i;
+        }
+        
+        resp += BREAK_LINE;
+        
+        
+        for(Vertex vert : mapAdjacents.keySet()) {
+        	resp += vert.getValue();
+        	for(int i = 0;i<numberVertex;i++) {
+        		if(mapAdjacents.get(vert).containsKey(nodes.get(i))) {
+        			resp +=" "+mapAdjacents.get(vert).get(nodes.get(i)).getWeight();
+        		}else {
+        			resp +=" "+0;
+        		}
+        	}
+        	resp+=BREAK_LINE;
+        }
+        
+        
+        return resp;
+       
+       
+    }
+ 
+    private String graphRepresentationAL(Graph<Integer> graph){
+    	
+    	int numberVertex = graph.numberVertex();
+        List<Vertex<Integer>> nodes = graph.getNodes(); 
+        Map<Vertex<Integer>, Set<Vertex>> mapAdjacents = new HashMap<Vertex<Integer>, Set<Vertex>>();
+       
+        for(Vertex node: nodes){
+            ArrayList<Edge> edges = (ArrayList) node.getEdges();
+            Set<Vertex> adjacents = new HashSet<Vertex>();
+            for(Edge edge : edges) {
+            	if(!edge.getEnd().equals(node)) {
+            		adjacents.add(edge.getEnd());
+            	}else {
+            		adjacents.add(edge.getStart());
+            	}
+            }
+            mapAdjacents.put(node, adjacents);
+        }
+        
+        
+        String resp = "";
+        
+        for(Vertex verts : mapAdjacents.keySet()) {
+        	resp += verts.getValue() +" -";
+        	for(Vertex adjVerts : mapAdjacents.get(verts)) {
+        		resp +=" "+adjVerts.getValue();
+        	}
+        	resp+=BREAK_LINE;
+        }
+       
+       
+        return resp;
+    }
 
 	@Override
 	public String BFS(Graph<Integer> graph, Vertex<Integer> vertex) {
