@@ -13,17 +13,22 @@ public class GraphManipulator implements Manipulator {
 			Scanner scanner = new Scanner(file);
 
 			Graph<Integer> graph = new Graph<Integer>();
-
+			String firstLine = scanner.nextLine();
+			Integer numberVertex = Integer.valueOf(firstLine);
+			
+			for (int i = 1; i <= numberVertex; i++) {
+				Vertex<Integer> vertex = new Vertex<Integer>(i);
+				graph.addVertex(vertex);
+			}
+			
 			while (scanner.hasNext()) {
 				String line = scanner.nextLine();
 				String[] values = line.trim().split(" ");
 
-				if (values.length > 1) {
-					Vertex<Integer> vertex1 = new Vertex<>(Integer.valueOf(values[0]));
-					Vertex<Integer> vertex2 = new Vertex<>(Integer.valueOf(values[1]));
+				Vertex<Integer> vertex1 = new Vertex<>(Integer.valueOf(values[0]));
+				Vertex<Integer> vertex2 = new Vertex<>(Integer.valueOf(values[1]));
 
-					graph.connect(vertex1, vertex2);
-				}
+				graph.connect(vertex1, vertex2);
 			}
 
 			scanner.close();
@@ -36,8 +41,38 @@ public class GraphManipulator implements Manipulator {
 	}
 
 	@Override
-	public void readWeightedGraph(String path) {
+	public Graph<Integer> readWeightedGraph(String path) {
+		try {
+			File file = new File(path);
+			Scanner scanner = new Scanner(file);
 
+			Graph<Integer> graph = new Graph<Integer>();
+			String firstLine = scanner.nextLine();
+			Integer numberVertex = Integer.valueOf(firstLine);
+			
+			for (int i = 1; i <= numberVertex; i++) {
+				Vertex<Integer> vertex = new Vertex<Integer>(i);
+				graph.addVertex(vertex);
+			}
+			
+			while (scanner.hasNext()) {
+				String line = scanner.nextLine();
+				String[] values = line.trim().split(" ");
+				
+				Vertex<Integer> vertex1 = new Vertex<>(Integer.valueOf(values[0]));
+				Vertex<Integer> vertex2 = new Vertex<>(Integer.valueOf(values[1]));
+				float weight = Float.valueOf(values[2]);
+
+				graph.connect(vertex1, vertex2, weight);
+			}
+
+			scanner.close();
+
+			return graph;
+		} catch (FileNotFoundException e) {
+			System.out.println("File" + path + " does not exists.");
+			return null;
+		}
 	}
 
 	@Override
