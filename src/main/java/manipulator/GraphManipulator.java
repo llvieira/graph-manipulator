@@ -82,16 +82,8 @@ public class GraphManipulator implements Manipulator {
 		String stringBfsOut = "";
 		
 		if(graph.getNodes().size() > 0) {
-		
-			Map<Integer, Integer[]> bfsOutput = new HashMap<>();
-			Queue<Vertex<Integer>> queue = new LinkedList<>();
-		
-			Integer[] initialLevel = {0, null};
-			bfsOutput.put(vertex.getValue(), initialLevel);
-			queue.add(vertex);
-		
-			BFS(queue, bfsOutput);
-			
+			Map<Integer, Integer[]> bfsOutput = BFS(vertex);
+					
 			stringBfsOut = formatSearchOutput(bfsOutput);
 			
 			return stringBfsOut;
@@ -99,7 +91,46 @@ public class GraphManipulator implements Manipulator {
 		
 		return stringBfsOut;
 	}
+	
+	@Override
+	public String shortestPath(Vertex<Integer> vertex1, Vertex<Integer> vertex2) {
+		return null;
+	}
 
+	@Override
+	public String MST(Graph<Integer> graph) {
+		return null;
+	}
+
+	@Override
+	public boolean connected(Graph<Integer> graph) {
+		if(graph.getNodes().size() > 0) {
+			Vertex<Integer> firstVertex = graph.getNodes().get(0);
+			Map<Integer, Integer[]> bfsOut = BFS(firstVertex);
+			
+			for (Vertex<Integer> vertex: graph.getNodes()) {
+				if (!bfsOut.containsKey(vertex.getValue())) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
+	
+	public Map<Integer, Integer[]> BFS(Vertex<Integer> vertex) {
+		Map<Integer, Integer[]> bfsOutput = new HashMap<>();
+		Queue<Vertex<Integer>> queue = new LinkedList<>();
+	
+		Integer[] initialLevel = {0, null};
+		bfsOutput.put(vertex.getValue(), initialLevel);
+		queue.add(vertex);
+	
+		BFS(queue, bfsOutput);
+		
+		return bfsOutput;
+	}
+	
 	private void BFS(Queue<Vertex<Integer>> queue, Map<Integer, Integer[]> bfsOutput) {
 		if (!queue.isEmpty()) {
 			Vertex<Integer> visited = queue.poll();
@@ -166,20 +197,5 @@ public class GraphManipulator implements Manipulator {
 		}
 
 		return string;
-	}
-
-	@Override
-	public String shortestPath(Vertex<Integer> vertex1, Vertex<Integer> vertex2) {
-		return null;
-	}
-
-	@Override
-	public String MST(Graph<Integer> graph) {
-		return null;
-	}
-
-	@Override
-	public boolean connected(Graph<Integer> graph) {
-		return false;
 	}
 }
