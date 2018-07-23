@@ -4,7 +4,7 @@ public interface Manipulator {
 
     Graph<Integer> readGraph(String path);
 
-    Graph<Integer> readWeightedGraph(String path);
+    Graph<String> readWeightedGraph(String path);
 
     int getVertexNumber(Graph<Integer> graph);
 

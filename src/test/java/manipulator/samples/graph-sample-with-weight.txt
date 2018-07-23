@@ -1,7 +1,142 @@
-5
-1 2 0.1
-2 5 0.2
-5 3 5
-3 4 -9.5
-4 5 2.3
-1 5 1
+142
+Brigitte Bardot,Brigitte Bardot,4
+Doris Day,Doris Day,4
+Olivia de Havilland,Olivia de Havilland,4
+Kirk Douglas,Kirk Douglas,4
+Sophia Loren,Sophia Loren,4
+Raquel Welch,Raquel Welch,4
+Li Gong,Li Gong,4
+Elena Koreneva,Elena Koreneva,4
+Armin Mueller-Stahl,Armin Mueller-Stahl,4
+Gérard Pirès,Gérard Pirès,4
+John Cleese,John Cleese,4
+John Cleese,Jamie Lee Curtis,1
+Brad Pitt,Brad Pitt,4
+Woody Allen,Woody Allen,4
+Gillian Anderson,Gillian Anderson,4
+Gillian Anderson,David Duchovny,1
+Pamela Anderson,Pamela Anderson,4
+Jennifer Aniston,Jennifer Aniston,4
+Patricia Arquette,Patricia Arquette,4
+Rowan Atkinson,Rowan Atkinson,4
+Dan Aykroyd,Dan Aykroyd,4
+Kevin Bacon,Kevin Bacon,4
+Fairuza Balk,Fairuza Balk,4
+Antonio Banderas,Antonio Banderas,4
+Antonio Banderas,Salma Hayek,1
+Adrienne Barbeau,Adrienne Barbeau,4
+Drew Barrymore,Drew Barrymore,4
+Kim Basinger,Kim Basinger,4
+Kim Basinger,Russell Crowe,1
+Yasmine Bleeth,Yasmine Bleeth,4
+Kenneth Branagh,Kenneth Branagh,4
+Matthew Broderick,Matthew Broderick,4
+Pierce Brosnan,Pierce Brosnan,4
+Pierce Brosnan,Colin Firth,1
+Pierce Brosnan,Teri Hatcher,1
+Sandra Bullock,Sandra Bullock,4
+Steve Buscemi,Steve Buscemi,4
+Nicolas Cage,Nicolas Cage,4
+Nicolas Cage,Sean Connery,1
+Neve Campbell,Neve Campbell,4
+Tia Carrere,Tia Carrere,4
+Tia Carrere,Jamie Lee Curtis,1
+Jim Carrey,Jim Carrey,4
+Phoebe Cates,Phoebe Cates,4
+Jennifer Connelly,Jennifer Connelly,4
+Jennifer Connelly,Russell Crowe,1
+Jennifer Connelly,Ron Howard,1
+Sean Connery,Nicolas Cage,1
+Sean Connery,Sean Connery,4
+Kevin Costner,Kevin Costner,4
+Russell Crowe,Kim Basinger,1
+Russell Crowe,Jennifer Connelly,1
+Russell Crowe,Russell Crowe,4
+Russell Crowe,Ron Howard,1
+Tom Cruise,Tom Cruise,4
+Tom Cruise,Kelly McGillis,1
+Tom Cruise,Renée Zellweger,1
+Jamie Lee Curtis,John Cleese,1
+Jamie Lee Curtis,Tia Carrere,1
+Jamie Lee Curtis,Jamie Lee Curtis,4
+John Cusack,John Cusack,4
+Claire Danes,Claire Danes,4
+Claire Danes,Nicole Kidman,1
+Geena Davis,Geena Davis,4
+Geena Davis,Jeff Goldblum,1
+Robert De Niro,Robert De Niro,4
+Robert De Niro,Jodie Foster,1
+Johnny Depp,Johnny Depp,4
+Bo Derek,Bo Derek,4
+Leonardo DiCaprio,Leonardo DiCaprio,4
+Leonardo DiCaprio,Jack Nicholson,1
+Cameron Diaz,Cameron Diaz,4
+Michael Douglas,Michael Douglas,4
+David Duchovny,Gillian Anderson,1
+David Duchovny,David Duchovny,4
+Clint Eastwood,Clint Eastwood,4
+Clint Eastwood,Morgan Freeman,1
+Erika Eleniak,Erika Eleniak,4
+Cary Elwes,Cary Elwes,4
+Sherilyn Fenn,Sherilyn Fenn,4
+Ralph Fiennes,Ralph Fiennes,4
+Ralph Fiennes,Jeff Goldblum,1
+Colin Firth,Pierce Brosnan,1
+Colin Firth,Colin Firth,4
+Colin Firth,Renée Zellweger,1
+Harrison Ford,Harrison Ford,4
+Harrison Ford,Tommy Lee Jones,1
+Harrison Ford,Kelly McGillis,1
+Jodie Foster,Robert De Niro,1
+Jodie Foster,Jodie Foster,4
+Jodie Foster,Anthony Hopkins,1
+Jodie Foster,Kelly McGillis,1
+Michael J. Fox,Michael J. Fox,4
+Morgan Freeman,Clint Eastwood,1
+Morgan Freeman,Morgan Freeman,4
+Richard Gere,Richard Gere,4
+Richard Gere,Renée Zellweger,1
+Gina Gershon,Gina Gershon,4
+Mel Gibson,Mel Gibson,4
+Whoopi Goldberg,Whoopi Goldberg,4
+Jeff Goldblum,Geena Davis,1
+Jeff Goldblum,Ralph Fiennes,1
+Jeff Goldblum,Jeff Goldblum,4
+Linda Hamilton,Linda Hamilton,4
+Tom Hanks,Tom Hanks,4
+Tom Hanks,Helen Hunt,1
+Teri Hatcher,Pierce Brosnan,1
+Teri Hatcher,Teri Hatcher,4
+Ethan Hawke,Ethan Hawke,4
+Salma Hayek,Antonio Banderas,1
+Salma Hayek,Salma Hayek,4
+Anne Heche,Anne Heche,4
+Dustin Hoffman,Dustin Hoffman,4
+Anthony Hopkins,Jodie Foster,1
+Anthony Hopkins,Anthony Hopkins,4
+Ron Howard,Jennifer Connelly,1
+Ron Howard,Russell Crowe,1
+Ron Howard,Ron Howard,4
+Helen Hunt,Tom Hanks,1
+Helen Hunt,Helen Hunt,4
+Helen Hunt,Jack Nicholson,1
+Elizabeth Hurley,Elizabeth Hurley,4
+Samuel L. Jackson,Samuel L. Jackson,4
+Tommy Lee Jones,Harrison Ford,1
+Tommy Lee Jones,Tommy Lee Jones,4
+Nicole Kidman,Claire Danes,1
+Nicole Kidman,Nicole Kidman,4
+Nicole Kidman,Renée Zellweger,1
+Jack Nicholson,Leonardo DiCaprio,1
+Jack Nicholson,Helen Hunt,1
+Jack Nicholson,Jack Nicholson,4
+Al Pacino,Al Pacino,4
+Kelly McGillis,Tom Cruise,1
+Kelly McGillis,Harrison Ford,1
+Kelly McGillis,Jodie Foster,1
+Kelly McGillis,Kelly McGillis,4
+Renée Zellweger,Tom Cruise,1
+Renée Zellweger,Colin Firth,1
+Renée Zellweger,Richard Gere,1
+Renée Zellweger,Nicole Kidman,1
+Renée Zellweger,Renée Zellweger,4
