@@ -1,30 +1,56 @@
 package manipulator;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.stream.Collectors;
+
 public class Main {
 
 	public static void main(String[] args) {
 		GraphManipulator graphManipulator = new GraphManipulator();
+		String path = "src/test/java/manipulator/samples/graph-sample-with-weight.txt";
 
-		Graph<Integer> graph = new Graph<Integer>();
-
-		Vertex<Integer> vertex1 = new Vertex<>(1);
-		Vertex<Integer> vertex2 = new Vertex<>(2);
-		Vertex<Integer> vertex3 = new Vertex<>(3);
-		Vertex<Integer> vertex4 = new Vertex<>(4);
-		Vertex<Integer> vertex5 = new Vertex<>(5);
-
-		graph.addVertex(vertex1);
-		graph.addVertex(vertex2);
-		graph.addVertex(vertex3);
-		graph.addVertex(vertex4);
-		graph.addVertex(vertex5);
-
-		graph.connect(vertex1, vertex2);
-		graph.connect(vertex1, vertex5);
-		graph.connect(vertex2, vertex5);
-		graph.connect(vertex5, vertex3);
-		graph.connect(vertex4, vertex5);
-
-		System.out.println(graphManipulator.BFS(graph, vertex1));
+		Graph<String> graph = graphManipulator.readWeightedGraph(path);
+		
+		Vertex<String> tomCruize =  graph.getNodes().stream()
+				.filter(node -> node.getValue().equals("Tom Cruise"))
+				.findFirst().get();
+		
+		List<Vertex<String>> otherActors = graph.getNodes().stream()
+					.filter(node -> !node.getValue().equals("Tom Cruise"))
+					.collect(Collectors.toList());
+		
+	}
+	
+	public static void shortestPath(List<Vertex<String>> otherActors, Vertex<String> target) {
+		Map<String, Integer> distances = new HashMap<>();
+		for (Vertex<String> vertex : otherActors) {
+			Queue<Vertex<String>> queue = new LinkedList<>();
+			
+			for(Edge<String> e : vertex.getEdges()) {
+				queue.add(e.getEnd()); // Need fix, should have the initial vertex.
+			}
+			
+			Queue<Vertex<String>> aux = new LinkedList<>();
+			int level = 1;
+			
+			while(queue.size() > 0) {
+				for (Vertex<String> v : queue) {
+					if (v.equals(target)) {
+						distances.put(v.getValue(), level);
+						break;
+					}
+					for(Edge<String> e2: v.getEdges()) {
+						aux.add(e2.getEnd());
+					}
+				}
+				queue = aux;
+				aux = new LinkedList<>();
+				level++;
+			}
+		}
 	}
 }

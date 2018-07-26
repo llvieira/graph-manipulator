@@ -44,26 +44,26 @@ public class GraphManipulator implements Manipulator {
 	}
 
 	@Override
-	public Graph<Integer> readWeightedGraph(String path) {
+	public Graph<String> readWeightedGraph(String path) {
 		try {
 			File file = new File(path);
 			Scanner scanner = new Scanner(file);
 
-			Graph<Integer> graph = new Graph<Integer>();
+			Graph<String> graph = new Graph<>();
 			String firstLine = scanner.nextLine();
 			Integer numberVertex = Integer.valueOf(firstLine);
 			
 			for (int i = 1; i <= numberVertex; i++) {
-				Vertex<Integer> vertex = new Vertex<Integer>(i);
+				Vertex<String> vertex = new Vertex<String>(String.valueOf(i));
 				graph.addVertex(vertex);
 			}
 			
 			while (scanner.hasNext()) {
 				String line = scanner.nextLine();
-				String[] values = line.trim().split(" ");
+				String[] values = line.trim().split(",");
 				
-				Vertex<Integer> vertex1 = new Vertex<>(Integer.valueOf(values[0]));
-				Vertex<Integer> vertex2 = new Vertex<>(Integer.valueOf(values[1]));
+				Vertex<String> vertex1 = new Vertex<>(values[0]);
+				Vertex<String> vertex2 = new Vertex<>(values[1]);
 				float weight = Float.valueOf(values[2]);
 
 				graph.connect(vertex1, vertex2, weight);

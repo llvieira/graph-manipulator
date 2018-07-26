@@ -53,36 +53,36 @@ public class GraphManipulatorTest {
 		Assert.assertEquals(expectedBFS, answer);
 	}
 	
-	@Test
-	public void testGraphRepresentationWeightAM() {
-		Graph<Integer> graph = graphManipulator.readWeightedGraph(GRAPH_SAMPLE_WITH_WEIGHT_PATH);
-		String answer = this.graphManipulator.graphRepresentation(graph, "AM");
-		
-		
-		String expectedBFS =  "  1 2 3 4 5\n" + 
-							  "1 0 0.1 0 0 1.0\n" + 
-							  "2 0.1 0 0 0 0.2\n" + 
-							  "3 0 0 0 -9.5 5.0\n" + 
-							  "4 0 0 -9.5 0 2.3\n" +
-							  "5 1.0 0.2 5.0 2.3 0\n";
-		
-		Assert.assertEquals(expectedBFS, answer);
-	}
+//	@Test
+//	public void testGraphRepresentationWeightAM() {
+//		Graph<Integer> graph = graphManipulator.readWeightedGraph(GRAPH_SAMPLE_WITH_WEIGHT_PATH);
+//		String answer = this.graphManipulator.graphRepresentation(graph, "AM");
+//		
+//		
+//		String expectedBFS =  "  1 2 3 4 5\n" + 
+//							  "1 0 0.1 0 0 1.0\n" + 
+//							  "2 0.1 0 0 0 0.2\n" + 
+//							  "3 0 0 0 -9.5 5.0\n" + 
+//							  "4 0 0 -9.5 0 2.3\n" +
+//							  "5 1.0 0.2 5.0 2.3 0\n";
+//		
+//		Assert.assertEquals(expectedBFS, answer);
+//	}
 	
-	@Test
-	public void testGraphRepresentationWeightAL() {
-		Graph<Integer> graph = graphManipulator.readWeightedGraph(GRAPH_SAMPLE_WITH_WEIGHT_PATH);
-		String answer = this.graphManipulator.graphRepresentation(graph, "AL");
-		
-		
-		String expectedBFS =  "1 - 2(0.1) 5(1.0)\n" + 
-							  "2 - 1(0.1) 5(0.2)\n" + 
-							  "3 - 5(5.0) 4(-9.5)\n" + 
-							  "4 - 3(-9.5) 5(2.3)\n" + 
-							  "5 - 2(0.2) 3(5.0) 4(2.3) 1(1.0)\n";
-		
-		Assert.assertEquals(expectedBFS, answer);
-	}
+//	@Test
+//	public void testGraphRepresentationWeightAL() {
+//		Graph<Integer> graph = graphManipulator.readWeightedGraph(GRAPH_SAMPLE_WITH_WEIGHT_PATH);
+//		String answer = this.graphManipulator.graphRepresentation(graph, "AL");
+//		
+//		
+//		String expectedBFS =  "1 - 2(0.1) 5(1.0)\n" + 
+//							  "2 - 1(0.1) 5(0.2)\n" + 
+//							  "3 - 5(5.0) 4(-9.5)\n" + 
+//							  "4 - 3(-9.5) 5(2.3)\n" + 
+//							  "5 - 2(0.2) 3(5.0) 4(2.3) 1(1.0)\n";
+//		
+//		Assert.assertEquals(expectedBFS, answer);
+//	}
 	
 	
 	@Test
@@ -100,25 +100,25 @@ public class GraphManipulatorTest {
 		Assert.assertEquals(expectedBFS, answer);
 	}
 	
-	@Test
-	public void testReadWeightedGraph() {
-		Graph<Integer> graph = graphManipulator.readWeightedGraph(GRAPH_SAMPLE_WITH_WEIGHT_PATH);
-
-		List<Vertex<Integer>> realNodes = graph.getNodes();
-		List<Vertex<Integer>> mockNodes = mockGraphWithWeight().getNodes();
-
-		for (int i = 0; i < realNodes.size(); i++) {
-			Assert.assertEquals(realNodes.get(i), mockNodes.get(i));
-
-			List<Edge<Integer>> realEdges = realNodes.get(i).getEdges();
-			List<Edge<Integer>> mockEdges = mockNodes.get(i).getEdges();
-
-			for (int j = 0; j < realEdges.size(); j++) {
-				Assert.assertEquals(realEdges.get(j).getEnd(), mockEdges.get(j).getEnd());
-				Assert.assertEquals(realEdges.get(j).getWeight(), mockEdges.get(j).getWeight());
-			}
-		}	
-	}
+//	@Test
+//	public void testReadWeightedGraph() {
+//		Graph<Integer> graph = graphManipulator.readWeightedGraph(GRAPH_SAMPLE_WITH_WEIGHT_PATH);
+//
+//		List<Vertex<Integer>> realNodes = graph.getNodes();
+//		List<Vertex<Integer>> mockNodes = mockGraphWithWeight().getNodes();
+//
+//		for (int i = 0; i < realNodes.size(); i++) {
+//			Assert.assertEquals(realNodes.get(i), mockNodes.get(i));
+//
+//			List<Edge<Integer>> realEdges = realNodes.get(i).getEdges();
+//			List<Edge<Integer>> mockEdges = mockNodes.get(i).getEdges();
+//
+//			for (int j = 0; j < realEdges.size(); j++) {
+//				Assert.assertEquals(realEdges.get(j).getEnd(), mockEdges.get(j).getEnd());
+//				Assert.assertEquals(realEdges.get(j).getWeight(), mockEdges.get(j).getWeight());
+//			}
+//		}	
+//	}
 	
 	@Test
 	public void getVertexNumber() {
